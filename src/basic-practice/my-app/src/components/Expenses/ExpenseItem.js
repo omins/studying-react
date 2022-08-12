@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from './Card';
+import Card from '../UI/Card';
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate';
 
-function ExpenseItem(props) {
+const ExpenseItem = props => {
   const { title, date, amount } = props;
 
   return (
