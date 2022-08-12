@@ -5,7 +5,6 @@ import ExpenseDate from './ExpenseDate';
 
 const ExpenseItem = props => {
   const [title, setTitle] = useState(props.title);
-  console.log('rendered')
   const { date, amount } = props;
   
   const clickHandler = () => {
