@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../Button/Button';
+import Card from '../../UI/Card/Card';
+import Button from '../../UI/Button/Button';
 
 const NewUserControls = styled.div`
   display: flex;
@@ -87,21 +88,23 @@ const NewUserForm = props => {
   }
 
   return (
-    <form onSubmit={submitHandler} style={{position: "relative"}}>
-      <NewUserControls>
-        <NewUserControl>
-          <label>Username</label>
-          <input type='text' onChange={usernameChangeHandler} value={enteredUsername}></input>
-        </NewUserControl>
-        <NewUserControl>
-          <label>Age</label>
-          <input type='number' onChange={ageChangeHandler} value={enteredAge}></input>
-        </NewUserControl>
-      </NewUserControls>
-      <NewUserActions>
-        <SubmitButton type='submit'>Add User</SubmitButton>
-      </NewUserActions> 
-    </form>
+    <Card>
+      <form onSubmit={submitHandler} style={{position: "relative"}}>
+        <NewUserControls>
+          <NewUserControl>
+            <label>Username</label>
+            <input type='text' onChange={usernameChangeHandler} value={enteredUsername}></input>
+          </NewUserControl>
+          <NewUserControl>
+            <label>Age</label>
+            <input type='number' onChange={ageChangeHandler} value={enteredAge}></input>
+          </NewUserControl>
+        </NewUserControls>
+        <NewUserActions>
+          <SubmitButton type='submit'>Add User</SubmitButton>
+        </NewUserActions> 
+      </form>
+    </Card>
   )
 }
 

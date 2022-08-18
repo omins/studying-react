@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
 import styled from 'styled-components';
-import Card from './components/Card/Card';
 import Modal from './components/Modal/Modal';
-import NewUserForm from './components/NewUserForm/NewUserFrom';
-import UserList from './components/UserList/UserList';
-
+import NewUserForm from './components/User/NewUserForm/NewUserFrom';
+import UserList from './components/User/UserList/UserList';
 
 const MainInner = styled.div`
   width: 100vw;
@@ -27,14 +25,8 @@ function App() {
 
   return (
     <MainInner className="App">
-      <Card>
-        <NewUserForm onUserRegister={onUserRegister} onInvalidUser={setModalInfo}/>
-      </Card>
-      {userList.length > 0 && 
-      <Card>
-        <UserList userList={userList}/>
-      </Card>
-      }
+      <NewUserForm onUserRegister={onUserRegister} onInvalidUser={setModalInfo}/>
+      {userList.length > 0 && <UserList userList={userList}/>}
       {modalInfo.isActive && <Modal onModalClose={setModalInfo} message={modalInfo.message}/>}
     </MainInner>
   );

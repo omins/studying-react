@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import UserItem from './UserItem';
+import Card from '../../UI/Card/Card';
+import UserItem from '../UserItem/UserItem';
 
 const StyledUserList = styled.ul`
   display: flex;
@@ -11,11 +12,13 @@ const UserList = props => {
   const { userList } = props;
   console.log(userList)
   return (
-    <StyledUserList>
-      {userList.map(el => {
-        return <UserItem key={el.id} name={el.name} age={el.age}/>
-      })}
-    </StyledUserList>
+    <Card>
+      <StyledUserList>
+        {userList.map(el => {
+          return <UserItem key={el.id} name={el.name} age={el.age}/>
+        })}
+      </StyledUserList>
+    </Card>
   )
 }
 

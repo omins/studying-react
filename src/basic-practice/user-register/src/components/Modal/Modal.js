@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../Button/Button';
-import Card from '../Card/Card';
+import Button from '../UI/Button/Button';
+import Card from '../UI/Card/Card';
 
 const ModalBackground = styled.div`
   position: fixed;
