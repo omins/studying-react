@@ -12,9 +12,8 @@ const StyledCard = styled.div`
     margin-top: 0px;
   }
 `
-const Card = props => {
-  const { width } = props;
-  return (<StyledCard width={width}>{props.children}</StyledCard>)
+const Card = ({ width, className, children }) => {
+  return (<StyledCard width={width} className={className}>{children}</StyledCard>)
 }
 
 export default Card;

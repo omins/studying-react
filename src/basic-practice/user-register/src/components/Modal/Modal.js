@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
+import Card from '../Card/Card';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -14,17 +15,14 @@ const ModalBackground = styled.div`
   z-index: 5000;
 `
 
-const ModalInner = styled.div`
+const ModalInner = styled(Card)`
   position: fixed;
   display: flex;
   flex-direction: column;
   top: 30%;
   left: 50%;
-  width: 700px;
   height: 300px;
   padding: 15px;
-  border-radius: 15px;
-  background-color: #fff;
   overflow: hidden;
   transform: translateX(-50%);
   z-index: 5001;
@@ -48,17 +46,17 @@ const ModalMain = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
-
-  & button {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-  }
 `
 
 const ModalText = styled.p`
   font-size: 24px;
   font-weight: 400;
+`
+
+const ModalButton = styled(Button)`
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
 `
 
 const Modal = props => {
@@ -70,7 +68,7 @@ const Modal = props => {
         </ModalHeader>
         <ModalMain>
           <ModalText>Warning!</ModalText>
-          <Button>Okay</Button>
+          <ModalButton>Okay</ModalButton>
         </ModalMain>
       </ModalInner>
     </ModalBackground>

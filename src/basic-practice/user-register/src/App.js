@@ -22,7 +22,7 @@ function App() {
       <Card>
         <UserList/>
       </Card>
-      {/* <Modal/> */}
+      <Modal/>
     </MainInner>
   );
 }
