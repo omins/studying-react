@@ -29,16 +29,61 @@ const NewUserControl = styled.div`
 
 const NewUserActions = styled.div`
   padding: 15px 15px 15px 0;
-  
-  & button {
-    width: 100px;
-    height: 40px;
-  }
+`
+
+const SubmitButton = styled(Button)`
+  width: 100px;
+  height: 40px;
 `
 
 const NewUserForm = props => {
+  const [enteredUsername, setEnteredUsername] = useState('');
+  const [enteredAge, setEnteredAge] = useState('');
+  const { onUserRegister, onInvalidUser } = props;
+  
+  const usernameChangeHandler = event => {
+    setEnteredUsername(event.target.value);
+  }
+  const ageChangeHandler = event => {
+    setEnteredAge(event.target.value);
+  }
+
+  const resetInputs = () => {
+    setEnteredUsername('');
+    setEnteredAge('');
+  }
+
   const submitHandler = event => {
     event.preventDefault()
+
+    if (enteredUsername.trim().length === 0) {
+      onInvalidUser(prev => {
+        return {
+          isActive: true,
+          message: 'Please enter Username.'
+        }
+      })
+      return
+    }
+
+    if (enteredAge.trim().length === 0 || Number(enteredAge) < 1) {
+      onInvalidUser(prev => {
+        return {
+          isActive: true,
+          message: 'Age must be older than 0',
+        }
+      })
+      return
+    }
+
+    const newUser = {
+      id: Math.random(),
+      name: enteredUsername,
+      age: enteredAge
+    };
+
+    onUserRegister(newUser);
+    resetInputs();
   }
 
   return (
@@ -46,15 +91,15 @@ const NewUserForm = props => {
       <NewUserControls>
         <NewUserControl>
           <label>Username</label>
-          <input type='text'></input>
+          <input type='text' onChange={usernameChangeHandler} value={enteredUsername}></input>
         </NewUserControl>
         <NewUserControl>
           <label>Age</label>
-          <input type='number' min='1' step='1'></input>
+          <input type='number' onChange={ageChangeHandler} value={enteredAge}></input>
         </NewUserControl>
       </NewUserControls>
       <NewUserActions>
-        <Button type='submit'>Add User</Button>
+        <SubmitButton type='submit'>Add User</SubmitButton>
       </NewUserActions> 
     </form>
   )

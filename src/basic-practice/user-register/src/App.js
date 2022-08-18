@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './App.css';
 import styled from 'styled-components';
 import Card from './components/Card/Card';
@@ -7,22 +8,34 @@ import UserList from './components/UserList/UserList';
 
 
 const MainInner = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   padding-top: 30px;
   background-color: black;
 `
 
 function App() {
+  const [userList, setUserList] = useState([]);
+  const [modalInfo, setModalInfo] = useState({
+    isActive: false,
+    message: 'This is modal message.'
+  });
+
+  const onUserRegister = newUser => {
+    setUserList((prevUser) => [newUser, ...prevUser])
+  }
+
   return (
     <MainInner className="App">
       <Card>
-        <NewUserForm/>
+        <NewUserForm onUserRegister={onUserRegister} onInvalidUser={setModalInfo}/>
       </Card>
+      {userList.length > 0 && 
       <Card>
-        <UserList/>
+        <UserList userList={userList}/>
       </Card>
-      <Modal/>
+      }
+      {modalInfo.isActive && <Modal onModalClose={setModalInfo} message={modalInfo.message}/>}
     </MainInner>
   );
 }

@@ -60,15 +60,22 @@ const ModalButton = styled(Button)`
 `
 
 const Modal = props => {
+  const { message, onModalClose } = props;
+  
+  const modalCloseHandler = event => {
+    event.stopPropagation();
+    onModalClose(prev => {return {...prev, isActive: false}})
+  }
+
   return (
-    <ModalBackground>
-      <ModalInner>
+    <ModalBackground onClick={modalCloseHandler}>
+      <ModalInner onClick={event => event.stopPropagation()}>
         <ModalHeader>
-          <ModalTitle>This is Modal Header</ModalTitle>
+          <ModalTitle>Invalid Input</ModalTitle>
         </ModalHeader>
         <ModalMain>
-          <ModalText>Warning!</ModalText>
-          <ModalButton>Okay</ModalButton>
+          <ModalText>{message}</ModalText>
+          <ModalButton onClick={modalCloseHandler}>Okay</ModalButton>
         </ModalMain>
       </ModalInner>
     </ModalBackground>
