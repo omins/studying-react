@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
+
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -68,7 +70,8 @@ const Modal = props => {
   }
 
   return (
-    <ModalBackground onClick={modalCloseHandler}>
+    ReactDOM.createPortal(
+      <ModalBackground onClick={modalCloseHandler}>
       <ModalInner onClick={event => event.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>Invalid Input</ModalTitle>
@@ -79,6 +82,8 @@ const Modal = props => {
         </ModalMain>
       </ModalInner>
     </ModalBackground>
+    , document.querySelector('#modal-root'))
+    
   )
 }
 
