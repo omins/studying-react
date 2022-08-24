@@ -11,14 +11,16 @@ const Cart = props => {
   );
 
   return (
-    <Modal>
+    <Modal onClick={props.onHideCart}>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>11.11</span>
       </div>
       <div className={classes.actions}>
-        <button classNam={classes['button--alt']}>Close</button>
+        <button classNam={classes['button--alt']} onClick={props.onHideCart}>
+          Close
+        </button>
         <button classNam={classes.button}>Order</button>
       </div>
     </Modal>
