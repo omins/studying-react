@@ -11,9 +11,6 @@ function App() {
   const [error, setError] = useState(null);
 
   const addMovieHandler = async movie => {
-    setMovies(prevState => {
-      return [...prevState, movie];
-    });
     try {
       const response = await fetch(`${FirebaseURL}/movies.json`, {
         method: 'POST',
@@ -25,6 +22,10 @@ function App() {
       if (!response.ok) {
         throw new Error('Something went wrong with the server');
       }
+
+      setMovies(prevState => {
+        return [...prevState, movie];
+      });
     } catch (error) {
       alert(error.message);
     }
