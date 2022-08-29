@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import useInput from '../hooks/use-input';
 
 const SimpleInput = props => {
-  const [enteredName, setEnteredName] = useState('');
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
-  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+  const {
+    value: enteredName,
+    valueIsValid: enteredNameIsValid,
+    hasError: nameIsInvalid,
+    inputChangeHandler: nameInputChangeHandler,
+    inputBlurHandler: nameInputBlurHandler,
+    reset: nameInputReset,
+  } = useInput(value => value.trim() !== '');
 
-  const enteredNameIsValid = enteredName.trim() !== '';
-  const enteredEmailIsValid = enteredEmail.includes('@');
-
-  const nameIsInvalid = !enteredNameIsValid && enteredNameTouched;
-  const emailIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
+  const {
+    value: enteredEmail,
+    valueIsValid: enteredEmailIsValid,
+    hasError: emailIsInvalid,
+    inputChangeHandler: emailInputChangeHandler,
+    inputBlurHandler: emailInputBlurHandler,
+    reset: emailInputReset,
+  } = useInput(value => value.includes('@'));
 
   let formIsValid = false;
 
@@ -18,39 +25,14 @@ const SimpleInput = props => {
     formIsValid = true;
   }
 
-  const nameInputChangeHandler = event => {
-    setEnteredName(event.target.value);
-  };
-
-  const emailInputChangeHandler = event => {
-    setEnteredEmail(event.target.value);
-  };
-
-  const nameInputBlurHandler = event => {
-    setEnteredNameTouched(true);
-  };
-
-  const emailInputBlurHandler = event => {
-    setEnteredEmailTouched(true);
-  };
-
   const submitHandler = event => {
     event.preventDefault();
-
-    setEnteredNameTouched(true);
-    setEnteredEmailTouched(true);
-
-    if (!enteredNameIsValid || !enteredEmailIsValid) {
-      return;
-    }
 
     console.log(enteredName);
     console.log(enteredEmail);
 
-    setEnteredName('');
-    setEnteredEmail('');
-    setEnteredNameTouched(false);
-    setEnteredEmailTouched(false);
+    nameInputReset();
+    emailInputReset();
   };
 
   const getInputClasses = isInvalid => {
